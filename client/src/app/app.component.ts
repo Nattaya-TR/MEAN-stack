@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { OnInit} from "@angular/core";
+import { ClientService } from "./client.service";
+import { Client } from "./client";
 
 
 @Component({
@@ -9,29 +11,29 @@ import { OnInit} from "@angular/core";
 })
 export class AppComponent implements OnInit{
   title = 'client';
-  ClientModel = new ();
-  languages = ['HTML', 'CSS', 'JavaScript', 'PHP', 'Symfony', 'Angular'];
+  AllClients = [''];
+  ClientModel = new Client();
   submitted = false;
-  AllFriends = [{firstname: 'Coach', lastname: 'Tim', email: 'tim.broos@becode.org', phoneNumber: '0469420666', language: 'JavaScript'}];
-  url = 'http://localhost:9003/allFriends';
+  url = 'http://localhost:6969/allclients';
 
   onSubmit(): void {
     this.submitted = true;
-    this.addFriendService.addFriend(this.ClientModel)
+    this.clientService.addClient(this.ClientModel)
       .subscribe
       (data => console.log(this.ClientModel), error => console.error(error));
   }
 
-  constructor(private addFriendService: AddFriendService) {
+  constructor(private clientService: ClientService) {
   }
-  public async getAllFriend(url: string): Promise<any> {
+  public async getAllClients(url: string): Promise<any> {
     return await fetch(this.url, {method: 'get', headers: {'Content-Type': 'application/json'}})
       .then(response => {
         return response.json();
       })
-      .then(response => this.AllFriends = response);
+      .then(response => this.AllClients = response);
   }
+
   ngOnInit(): any {
-    this.getAllFriend(this.url).then(response => console.log(this.AllFriends));
+    this.getAllClients(this.url).then(response => console.log(this.AllClients));
   }
 }
