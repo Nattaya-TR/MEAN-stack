@@ -7,7 +7,7 @@
 <!-- * * * * * * * to get started with your project! * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<div class="newClient">
+<div class="newClient container">
   <h1>Clients List</h1>
   <form (ngSubmit)="onSubmit();" #ClientForm="ngForm" novalidate>
     <div class="row">
@@ -52,18 +52,21 @@
       </div>
 
       <div class="col-md-6">
-        <button type="submit" class="btn btn-default" [disabled]="ClientForm.form.invalid">Submit</button>
+        <button type="submit" class="btn btn-default" [disabled]="ClientForm.form.invalid" (click)="onSubmit()">Submit</button>
       </div>
     </div>
   </form>
 </div>
 
-<div class="display">
-  <h3>All Clients : </h3>
-  <div *ngFor="let client of AllClients">
+<div class="display container">
+  <div class="row">
+    <h3>All Clients : </h3>
+  </div>
+  <div *ngFor="let client of AllClients" class="col-md-6">
     <p>Name : {{client.firstName}}  {{client.lastName}}</p>
     <p>Email : {{client.email}}</p>
     <p>Phone number : {{client.phoneNumber}}</p>
+    <button class="delete-btn" (click)="deleteClient(client.email)">Delete friend</button>
   </div>
 </div>
 

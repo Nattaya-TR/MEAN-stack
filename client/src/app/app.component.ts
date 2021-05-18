@@ -11,10 +11,11 @@ import { Client } from "./client";
 })
 export class AppComponent implements OnInit{
   title = 'client';
-  AllClients = [''];
+  AllClients = [{ firstName: 'Nattaya', lastName: 'Trouillard', email: 'nattaya.trouille@gmail.com', phoneNumber: '+32472114366'}];
   ClientModel = new Client();
+  ClientList = Client[''];
   submitted = false;
-  url = 'http://localhost:6969/allclients';
+  url = 'http://localhost:6969/allClients';
 
   onSubmit(): void {
     this.submitted = true;
@@ -35,5 +36,16 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): any {
     this.getAllClients(this.url).then(response => console.log(this.AllClients));
+  }
+
+  public async deleteClient(email: string): Promise<any> {
+    await fetch(this.url, {method: 'get', headers: {'Content-Type': 'application/json'}})
+      .then(response => {
+        return response.json() as Promise<any>;
+      })
+      .then(response => {
+        return this.ClientList = response;
+      });
+    this.ClientList = this.ClientList.filter(friend => friend.email !== email);
   }
 }
