@@ -1,0 +1,86 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<div class="newFriend">
+  <h1>Friend List</h1>
+  <form (ngSubmit)="onSubmit();" #friendForm="ngForm" novalidate>
+    <div class="row">
+      <div class="col-md-6">
+        <label>Firstname : </label>
+        <input type="text" class="form-control" id="firstname"
+               required [(ngModel)]="FriendModel.firstname" name="firstname" #firstname="ngModel"><br><br>
+        <div [hidden]="firstname.valid || firstname.pristine" class="alert alert-danger">
+          Your firstname is required!
+        </div>
+        <br><br>
+      </div>
+
+      <div class="col-md-6">
+        <label>Lastname : </label>
+        <input type="text" class="form-control" id="lastname"
+               required [(ngModel)]="FriendModel.lastname" name="lastname" #lastname="ngModel"><br><br>
+        <div [hidden]="lastname.valid || lastname.pristine" class="alert alert-danger">
+          Your lastname is required!
+        </div>
+        <br><br>
+      </div>
+
+      <div class="col-md-6">
+        <label>Email : </label>
+        <input type="email" class="form-control" id="email"
+               required [(ngModel)]="FriendModel.email" name="email" #email="ngModel"><br><br>
+        <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+          Your email is required!
+        </div>
+        <br><br>
+      </div>
+
+      <div class="col-md-6">
+        <label>Phone number : </label>
+        <input type="tel" class="form-control" id="phoneNumber"
+               required [(ngModel)]="FriendModel.phoneNumber" name="phone" #phoneNumber="ngModel"><br><br>
+        <div [hidden]="phoneNumber.valid || phoneNumber.pristine" class="alert alert-danger">
+          Your phone number is required!
+        </div>
+        <br><br>
+      </div>
+
+      <div class="col-md-6">
+        <label>Your favorite languages </label>
+        <select  required [(ngModel)]="FriendModel.language" name="lang" #language="ngModel">
+          <option *ngFor="let lang of languages" [value]="lang">{{lang}}</option>
+        </select>
+        <div [hidden]="language.valid || language.pristine" class="alert alert-danger">
+          Please select the language!
+        </div>
+        <button type="submit" class="btn btn-default" [disabled]="friendForm.form.invalid">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="display">
+  <h3>All Friends : </h3>
+  <div *ngFor="let friend of AllFriends">
+    <p>Name : {{friend.firstname}}  {{friend.lastname}}</p>
+    <p>Email : {{friend.email}}</p>
+    <p>Phone number : {{friend.phoneNumber}}</p>
+    <p>Your favorite language : {{friend.language}}</p><br>
+  </div>
+</div>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<router-outlet></router-outlet>
